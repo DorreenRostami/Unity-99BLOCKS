@@ -176,7 +176,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25
+  orthographic size: 12.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -270,7 +270,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 36, y: 64}
+  m_Size: {x: 18, y: 32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -322,11 +322,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockWidth: 3
   blockHeight: 3
-  borderSize: {x: 12, y: 12}
+  borderSize: {x: 11, y: 11}
   blockSize: {x: 3.5, y: 3.5}
-  border: {fileID: 7636503561280516249, guid: f76eca6b68819de4bbe1168b943cebd2, type: 3}
-  block: {fileID: 316922826973619045, guid: e9bd02e73d08cc84fad448345ad19a91, type: 3}
-  cell: {fileID: 7164033248172221225, guid: 749931519bbcaf249a1e79c0b87cedb1, type: 3}
+  border: {fileID: 8674298520998731380, guid: c5641dc7c92ac9a45ab752cd0a713816, type: 3}
+  block: {fileID: 8674298520998731380, guid: c5641dc7c92ac9a45ab752cd0a713816, type: 3}
+  cell: {fileID: 9074599471001061112, guid: bbbb785a620896e4ea548ac9986c1004, type: 3}
   cellWidth: 3
   cellHeight: 3
   cellSize: {x: 1, y: 1}

@@ -29,7 +29,7 @@ public class GridController : MonoBehaviour
     {
         GameObject borderObj = Instantiate(border);
         borderObj.GetComponent<SpriteRenderer>().size = new Vector2(borderSize.x, borderSize.y);
-        borderObj.transform.position = new Vector2(0, 10);
+        borderObj.transform.position = new Vector2(0, 6);
         //borderObj.GetComponent<SpriteRenderer>().size = new Vector2(Screen.width / 2, Screen.height / 2);
         
         grid = new GridBlock[blockWidth, blockHeight];
