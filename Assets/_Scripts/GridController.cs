@@ -12,21 +12,29 @@ public class GridController : MonoBehaviour
     [SerializeField] Vector2 blockSize;
     public GameObject border;
     public GameObject block;
+    public GameObject bottomPanel;
 
 
     public GameObject cell;
     [SerializeField] int cellWidth, cellHeight;
-    [SerializeField] Vector2 cellSize;
+    public Vector2 cellSize;
+
+
+
     //SpriteRenderer sr;
     // Start is called before the first frame update
     void Start()
     {
         InitializeGrid();
-        //sr.size
     }
 
     private void InitializeGrid()
     {
+
+        GameObject panelObj = Instantiate(bottomPanel);
+        panelObj.GetComponent<SpriteRenderer>().size = new Vector2(borderSize.x + 2, (borderSize.y / 2.7f));
+        panelObj.transform.position = new Vector2(0, -9);
+
         GameObject borderObj = Instantiate(border);
         borderObj.GetComponent<SpriteRenderer>().size = new Vector2(borderSize.x, borderSize.y);
         borderObj.transform.position = new Vector2(0, 6);

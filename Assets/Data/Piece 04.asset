@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ae3cb018a8a4b4e9fe74eabe723c46, type: 3}
-  m_Name: ScriptbleLine3
+  m_Script: {fileID: 11500000, guid: 7b7a44c9e82b9fb488ef3baacccac6f0, type: 3}
+  m_Name: Piece 04
   m_EditorClassIdentifier: 
-  rotation: 0
+  Coordinations:
+  - {x: 0, y: 0}
