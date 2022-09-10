@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlaceHolder : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlaceHolder : MonoBehaviour
 
     public GameObject GridObj;
     private Vector2 size;
+    public Canvas canvas;
 
     void Start()
     {
@@ -34,11 +36,5 @@ public class PlaceHolder : MonoBehaviour
             cellObj.transform.SetParent(parent.transform);
             cellObj.transform.localPosition = new Vector2(cord[0], cord[1]);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
