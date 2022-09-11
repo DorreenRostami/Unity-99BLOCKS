@@ -17,12 +17,14 @@ public class PlaceHolder : MonoBehaviour
     private PieceController pieceController;
     
     private Vector3 mOffset;
+    private GridController grid;
 
     int rotIndex = 0;
 
     void Start()
     {
         pieceController = GameManager.Instance.GenerateShape();
+        grid = GameManager.Instance.gridController;
         pieceController.transform.SetParent(transform);
         pieceController.transform.localPosition = Vector3.zero;
         pieceController.Repaint(Rotation.zero);
@@ -42,6 +44,7 @@ public class PlaceHolder : MonoBehaviour
     void OnMouseDrag()
     {
         pieceController.transform.position = GetMouseWorldPos() + mOffset;
+        pieceController.CheckPos();
     }
 
     void OnMouseUp()
@@ -56,6 +59,7 @@ public class PlaceHolder : MonoBehaviour
             if (!GameManager.Instance.gridController.IsValid(pieceController.cellSprites[i].transform.position))
             {
                 pieceController.transform.localPosition = Vector3.zero;
+                pieceController.CleanPoes();
                 OnHolderFull(this);
                 return;
             }
