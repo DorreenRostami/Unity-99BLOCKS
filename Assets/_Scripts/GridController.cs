@@ -93,7 +93,7 @@ public class GridBlock
                 cellObj.GetComponent<SpriteRenderer>().size = new Vector2(cellSize.x, cellSize.y);
                 cellObj.transform.SetParent(Transform);
                 cellObj.transform.localPosition = new Vector2(cellSize.x * (x-1), cellSize.y * (y-1));
-                cellGrid[x, y] = new GridCell(x-1, y-1);
+                cellGrid[x, y] = new GridCell(x-1, y-1, cellObj.transform);
             }
         }
     }
