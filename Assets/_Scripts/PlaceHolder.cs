@@ -16,7 +16,8 @@ public class PlaceHolder : MonoBehaviour
     
     private Vector3 mOffset;
 
-    int rotIndex;
+    int rotIndex = 0;
+
     void Start()
     {
         pieceController = GameManager.Instance.GenerateShape();
@@ -59,7 +60,7 @@ public class PlaceHolder : MonoBehaviour
 
     public void OnRotateButtonClick()
     {
-        var r = (Rotation)(rotIndex++ % 4);
+        var r = (Rotation)(++rotIndex % 4);
         pieceController.Repaint(r);
     }
 

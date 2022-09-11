@@ -157,6 +157,8 @@ MonoBehaviour:
   cellsPrefab:
   - {fileID: 337836707177584531, guid: dbe7f52fe13e9584eaac8a3329b77145, type: 3}
   - {fileID: 1554526257684377081, guid: b184a916c26b2374582377c551ac15cf, type: 3}
+  - {fileID: 1427505311550537805, guid: 177dab6b3c6e91646bd0f3bfb37f0976, type: 3}
+  shapeCellSize: {x: 0.7, y: 0.7}
 --- !u!4 &76971618
 Transform:
   m_ObjectHideFlags: 0
