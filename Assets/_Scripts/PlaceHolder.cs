@@ -49,13 +49,14 @@ public class PlaceHolder : MonoBehaviour
         //if piece position is not in grid
         //getcellposfromworld
         pieceController.transform.localPosition = Vector3.zero;
-        OnHolderFull(this);
+        
         //OnHolderEmpty(this);
-        for (int i = 0; i < pieceController.cells.Length; i++)
+        for (int i = 0; i < pieceController.cellSprites.Length; i++)
         {
-            if (!GameManager.Instance.gridController.IsValid(pieceController.cells[i].position))
+            if (!GameManager.Instance.gridController.IsValid(pieceController.cellSprites[i].transform.position))
             {
                 pieceController.transform.localPosition = Vector3.zero;
+                OnHolderFull(this);
                 return;
             }
         }
