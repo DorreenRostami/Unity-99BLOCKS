@@ -13,6 +13,9 @@ public class GridController : MonoBehaviour
     public GameObject border;
     public GameObject block;
 
+    private Vector2 minPos;
+    private Vector2 maxPos;
+
 
     public GameObject cell;
     [SerializeField] int cellWidth, cellHeight;
@@ -44,9 +47,18 @@ public class GridController : MonoBehaviour
             }
         }
 
+        minPos = grid[0, 0].cellGrid[0, 0].Transform.position;
+        maxPos = grid[blockWidth-1, blockHeight-1].cellGrid[blockWidth - 1, blockHeight - 1].Transform.position;
+
     }
 
-    
+    public bool IsValid(Vector2 pos)
+    {
+        return pos.x >= minPos.x &&
+                pos.x <= maxPos.x &&
+                pos.y >= minPos.y &&
+                pos.y <= maxPos.y;
+    }
 
     // Update is called once per frame
     void Update()
@@ -90,9 +102,11 @@ public class GridCell
 {
     public int X { get; private set; }
     public int Y { get; private set; }
-    public GridCell(int x, int y)
+    public Transform Transform { get; private set; }
+    public GridCell(int x, int y, Transform transform)
     {
         X = x;
         Y = y;
+        Transform = transform;
     }
 }
