@@ -8,6 +8,9 @@ public class PlaceHolder : MonoBehaviour
 {
     [SerializeField] PieceDataManager DataManager;
     public GameObject[] cells;
+    private GameObject piece;
+    private Vector3 mOffset;
+    private Vector3 pieceStartedPosition;
 
     GameObject shape;
 
@@ -19,13 +22,33 @@ public class PlaceHolder : MonoBehaviour
     {
         size = GridObj.GetComponent<GridController>().cellSize;
         GenerateShape();
+        pieceStartedPosition = this.transform.position;
     }
 
+    void OnMouseDown()
+    {
+        mOffset = piece.transform.position - GetMouseWorldPos();
+    }
+
+    private Vector3 GetMouseWorldPos()
+    {
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    void OnMouseDrag()
+    {
+        piece.transform.position = GetMouseWorldPos() + mOffset;
+    }
+
+    void OnMouseUp()
+    {
+        piece.transform.position = pieceStartedPosition;    
+    }
     private void GenerateShape()
     {
-        GameObject parent = new GameObject("Piece");
-        parent.transform.SetParent(transform);
-        parent.transform.localPosition = Vector3.zero;
+        piece = new GameObject("Piece");
+        piece.transform.SetParent(transform);
+        piece.transform.localPosition = Vector3.zero;
 
         var dd = DataManager.GetRandomData();
         GameObject cell = cells[UnityEngine.Random.Range(0, cells.Length)];
@@ -33,7 +56,7 @@ public class PlaceHolder : MonoBehaviour
         {
             GameObject cellObj = MonoBehaviour.Instantiate(cell);
             cellObj.GetComponent<SpriteRenderer>().size = new Vector2(size.x, size.y);
-            cellObj.transform.SetParent(parent.transform);
+            cellObj.transform.SetParent(piece.transform);
             cellObj.transform.localPosition = new Vector2(cord[0], cord[1]);
         }
     }
