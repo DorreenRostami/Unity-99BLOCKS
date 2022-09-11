@@ -53,7 +53,6 @@ public class PlaceHolder : MonoBehaviour
         //getcellposfromworld
         pieceController.transform.localPosition = Vector3.zero;
         
-        //OnHolderEmpty(this);
         for (int i = 0; i < pieceController.cellSprites.Length; i++)
         {
             if (!GameManager.Instance.gridController.IsValid(pieceController.cellSprites[i].transform.position))
@@ -65,6 +64,7 @@ public class PlaceHolder : MonoBehaviour
             }
         }
 
+        OnHolderEmpty(this);
     }
 
 

@@ -18,6 +18,8 @@ public class HiddenPlaceHolder : MonoBehaviour
 
     private void OnPlaceHolderEmpty(PlaceHolder obj)
     {
+        pieceController.transform.parent = obj.transform;
+
         pieceController.transform.localScale = new Vector2(1, 1);
         for (int i = 0; i < pieceController.cellSprites.Length; i++)
         {
@@ -25,6 +27,8 @@ public class HiddenPlaceHolder : MonoBehaviour
             col.a = 1;
             pieceController.cellSprites[i].color = col;
         }
+
+        GenerateHiddenShape();
     }
 
     private void OnPlaceHolderFull(PlaceHolder obj)
@@ -36,13 +40,6 @@ public class HiddenPlaceHolder : MonoBehaviour
     {
         transform.SetParent(obj.transform);
         transform.localPosition = Vector3.zero;
-        pieceController.transform.localScale = new Vector2(0.5f, 0.5f);
-        for (int i = 0; i < pieceController.cellSprites.Length; i++)
-        {
-            var col = pieceController.cellSprites[i].color;
-            col.a = 0.4f;
-            pieceController.cellSprites[i].color = col;
-        }
         gameObject.SetActive(true);
     }
 
@@ -51,9 +48,17 @@ public class HiddenPlaceHolder : MonoBehaviour
         pieceController = GameManager.Instance.GenerateShape();
         pieceController.transform.SetParent(transform);
         pieceController.transform.localPosition = Vector3.zero;
+        
+        pieceController.transform.localScale = new Vector2(0.5f, 0.5f);
+        for (int i = 0; i < pieceController.cellSprites.Length; i++)
+        {
+            var col = pieceController.cellSprites[i].color;
+            col.a = 0.4f;
+            pieceController.cellSprites[i].color = col;
+        }
+
         pieceController.Repaint(Rotation.zero);
-        //var col = gameObject.GetComponent<Renderer>().material.color;
-        //col.a = 0.5f;
+
         gameObject.SetActive(false);
     }
 

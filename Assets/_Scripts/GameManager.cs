@@ -10,8 +10,11 @@ public class GameManager : MonoBehaviour
     public PieceDataManager DataManager;
     public GridController gridController;
     public GameObject[] cellsPrefab;
-
     public Vector2 shapeCellSize;
+
+    public GameObject playButton;
+    public GameObject pauseButton;
+
     private void Awake()
     {
         Instance = this;
@@ -54,6 +57,18 @@ public class GameManager : MonoBehaviour
             default:
                 return vec;
         }
+    }
+
+    public void PlayClicked()
+    {
+        playButton.SetActive(false);
+        pauseButton.SetActive(true);
+    }
+
+    public void PauseClicked()
+    {
+        playButton.SetActive(true);
+        pauseButton.SetActive(false);
     }
 }
 
