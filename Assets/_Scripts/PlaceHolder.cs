@@ -51,6 +51,15 @@ public class PlaceHolder : MonoBehaviour
         pieceController.transform.localPosition = Vector3.zero;
         OnHolderFull(this);
         //OnHolderEmpty(this);
+        for (int i = 0; i < pieceController.cells.Length; i++)
+        {
+            if (!GameManager.Instance.gridController.IsValid(pieceController.cells[i].position))
+            {
+                pieceController.transform.localPosition = Vector3.zero;
+                return;
+            }
+        }
+
     }
 
 
