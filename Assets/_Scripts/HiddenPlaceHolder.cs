@@ -18,7 +18,13 @@ public class HiddenPlaceHolder : MonoBehaviour
 
     private void OnPlaceHolderEmpty(PlaceHolder obj)
     {
-        pieceController.transform.parent = obj.transform;
+        obj.pieceController = this.pieceController;
+        obj.pieceController.transform.SetParent(obj.transform);
+        obj.pieceController.transform.localPosition = Vector3.zero;
+        //pieceController.Repaint(Rotation.zero);
+
+        //pieceController.transform.parent = obj.transform;
+
 
         pieceController.transform.localScale = new Vector2(1, 1);
         for (int i = 0; i < pieceController.cellSprites.Length; i++)

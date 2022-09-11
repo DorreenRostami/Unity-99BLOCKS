@@ -14,7 +14,7 @@ public class PlaceHolder : MonoBehaviour
     
     public GameObject GridObj;
    
-    private PieceController pieceController;
+    public PieceController pieceController;
     
     private Vector3 mOffset;
     private GridController grid;
