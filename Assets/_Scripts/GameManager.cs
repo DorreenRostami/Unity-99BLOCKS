@@ -11,11 +11,11 @@ public class GameManager : MonoBehaviour
     public GridController gridController;
     public GameObject[] cellsPrefab;
 
-    private Vector2 size;
+    public Vector2 shapeCellSize;
     private void Awake()
     {
         Instance = this;
-        size = gridController.cellSize;
+        //size = gridController.cellSize;
     }
     
     public PieceController GenerateShape()
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject cellObj = Instantiate(cell);
             Transform shape = cellObj.transform.Find("shape");
-            shape.GetComponent<SpriteRenderer>().size = new Vector2(size.x, size.y);
+            shape.GetComponent<Transform>().localScale = new Vector2(shapeCellSize.x, shapeCellSize.y);
             cellObj.transform.SetParent(piece.transform);
             cells.Add(cellObj.transform);
         }
