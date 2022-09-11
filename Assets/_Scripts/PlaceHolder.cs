@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class PlaceHolder : MonoBehaviour
 {
     public static System.Action<PlaceHolder> OnHolderClicked = delegate { };
+    public static System.Action<PlaceHolder> OnHolderFull = delegate { };
+    public static System.Action<PlaceHolder> OnHolderEmpty = delegate { };
     [SerializeField] PieceDataManager DataManager;
     
     public GameObject GridObj;
@@ -47,6 +49,8 @@ public class PlaceHolder : MonoBehaviour
         //if piece position is not in grid
         //getcellposfromworld
         pieceController.transform.localPosition = Vector3.zero;
+        OnHolderFull(this);
+        //OnHolderEmpty(this);
     }
 
 

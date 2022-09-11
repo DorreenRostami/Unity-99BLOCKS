@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
         foreach (Vector2 cord in data.Coordinations)
         {
             GameObject cellObj = Instantiate(cell);
-            Transform shape = cellObj.transform.Find("shape");
-            shape.GetComponent<Transform>().localScale = new Vector2(shapeCellSize.x, shapeCellSize.y);
+            Transform shape = cellObj.transform.GetChild(0);
+            shape.transform.localScale = new Vector2(shapeCellSize.x, shapeCellSize.y);
             cellObj.transform.SetParent(piece.transform);
             cells.Add(cellObj.transform);
         }

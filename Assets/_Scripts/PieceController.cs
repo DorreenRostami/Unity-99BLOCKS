@@ -10,21 +10,26 @@ namespace Assets._Scripts
     public class PieceController:MonoBehaviour
     {
         public PieceData data;
-        public Transform[] cells;
+        public SpriteRenderer[] cellSprites;
         public Rotation rot;
 
 
         public void Setup(PieceData data, Transform[] cells)
         {
             this.data = data;
-            this.cells = cells;
+            //this.cells = cells;
+            this.cellSprites = new SpriteRenderer[cells.Length];
+            for (int i = 0; i < cells.Length; i++)
+            {
+                this.cellSprites[i] = cells[i].GetChild(0).GetComponent<SpriteRenderer>();
+            }
         }
         public void Repaint(Rotation rot)
         {
             this.rot = rot;
-            for (int i = 0; i < cells.Length; i++)
+            for (int i = 0; i < cellSprites.Length; i++)
             {
-                cells[i].localPosition = GameManager.PosGen(rot, data.Coordinations[i]);
+                cellSprites[i].transform.parent.localPosition = GameManager.PosGen(rot, data.Coordinations[i]);
             }
         }
     }
