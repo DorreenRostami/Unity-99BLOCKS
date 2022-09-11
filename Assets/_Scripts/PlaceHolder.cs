@@ -7,16 +7,7 @@ using UnityEngine.UI;
 public class PlaceHolder : MonoBehaviour
 {
     [SerializeField] PieceDataManager DataManager;
-<<<<<<< HEAD
     public GameObject[] cellsPrefab;
-=======
-    public GameObject[] cells;
-    private GameObject piece;
-    private Vector3 mOffset;
-    private Vector3 pieceStartedPosition;
-
-    GameObject shape;
->>>>>>> 236a5f2661a6ac6b14582553ab4c1752833cdca2
 
     public GameObject GridObj;
     private Vector2 size;
@@ -27,10 +18,15 @@ public class PlaceHolder : MonoBehaviour
     private Rotation rot;
     PieceData data;
 
+    GameObject piece;
+    private Vector3 mOffset;
+    private Vector3 pieceStartedPosition;
+
     void Start()
     {
         size = GridObj.GetComponent<GridController>().cellSize;
         GenerateShape();
+
         pieceStartedPosition = this.transform.position;
     }
 
@@ -51,19 +47,16 @@ public class PlaceHolder : MonoBehaviour
 
     void OnMouseUp()
     {
-        piece.transform.position = pieceStartedPosition;    
+        //if piece position is not in grid
+        //getcellposfromworld
+        piece.transform.position = pieceStartedPosition;
     }
+
     private void GenerateShape()
     {
-<<<<<<< HEAD
         cells = new List<Transform>();
-=======
-        piece = new GameObject("Piece");
-        piece.transform.SetParent(transform);
-        piece.transform.localPosition = Vector3.zero;
->>>>>>> 236a5f2661a6ac6b14582553ab4c1752833cdca2
 
-        GameObject piece = new GameObject("Piece");
+        piece = new GameObject("Piece");
         piece.transform.SetParent(transform);
         piece.transform.localPosition = Vector3.zero;
 
@@ -74,7 +67,6 @@ public class PlaceHolder : MonoBehaviour
             GameObject cellObj = MonoBehaviour.Instantiate(cell);
             cellObj.GetComponent<SpriteRenderer>().size = new Vector2(size.x, size.y);
             cellObj.transform.SetParent(piece.transform);
-<<<<<<< HEAD
             cells.Add(cellObj.transform);
             //cellObj.transform.localPosition = new Vector2(cord[0], cord[1]);
         }
@@ -87,9 +79,6 @@ public class PlaceHolder : MonoBehaviour
         for (int i = 0; i < cells.Count; i++)
         {
             cells[i].localPosition = PosGen(data.Coordinations[i]);
-=======
-            cellObj.transform.localPosition = new Vector2(cord[0], cord[1]);
->>>>>>> 236a5f2661a6ac6b14582553ab4c1752833cdca2
         }
     }
 
