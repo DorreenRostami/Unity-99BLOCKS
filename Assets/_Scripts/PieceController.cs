@@ -39,7 +39,7 @@ namespace Assets._Scripts
         {
             for (int i = 0; i < cellSprites.Length; i++)
             {
-                cellSprites[i].transform.position = GameManager.Instance.gridController.GetCellPositionFromWorldPosition(transform.position + localPose[i]);
+                cellSprites[i].transform.parent.position = GameManager.Instance.gridController.GetCellPositionFromWorldPosition(transform.position + localPose[i]);
             }
         }
         public void CleanPoes()

@@ -51,7 +51,6 @@ public class PlaceHolder : MonoBehaviour
     {
         //if piece position is not in grid
         //getcellposfromworld
-        pieceController.transform.localPosition = Vector3.zero;
         
         for (int i = 0; i < pieceController.cellSprites.Length; i++)
         {

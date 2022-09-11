@@ -36,9 +36,7 @@ public class GridController : MonoBehaviour
 
 
 
-        //minPos = (Vector2) gridBlock[0, 0].cellGrid[0, 0].Transform.position - cellSize / 2;
-        //maxPos = (Vector2) gridBlock[blockWidth-1, blockHeight-1].cellGrid[cellWidth - 1, cellHeight - 1].Transform.position + cellSize/2;
-
+        
         ///////////
         grid = new GridCell[cellWidth * blockWidth, cellHeight * blockHeight];
         /*for (int x = 0; x < grid.GetLength(0); x++)
@@ -81,16 +79,18 @@ public class GridController : MonoBehaviour
                 gridBlock[x, y].InitializeBlock(cellWidth, cellHeight, cellSize, gridList);
             }
         }
+        minPos = (Vector2) grid[0,0].Transform.position - cellSize / 2;
+        maxPos = (Vector2) grid[blockWidth * cellWidth - 1, blockHeight * cellHeight - 1].Transform.position + cellSize/2;
+
 
     }
 
     public bool IsValid(Vector3 pos)
     {
-        /*return pos.x >= minPos.x &&
+        return pos.x >= minPos.x &&
                 pos.x <= maxPos.x &&
                 pos.y >= minPos.y &&
-                pos.y <= maxPos.y;*/
-        return true;
+                pos.y <= maxPos.y;
     }
 
     public Vector2 GetCellPositionFromWorldPosition(Vector2 pos)
