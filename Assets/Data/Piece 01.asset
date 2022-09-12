@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: Piece 01
   m_EditorClassIdentifier: 
   Coordinations:
-  - {x: -1.5, y: 0}
   - {x: -0.5, y: 0}
   - {x: 0.5, y: 0}
-  - {x: 1.5, y: 0}

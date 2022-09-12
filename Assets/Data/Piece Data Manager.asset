@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: Piece Data Manager
   m_EditorClassIdentifier: 
   Datas:
-  - {fileID: 11400000, guid: 37722efe54229184fba31dcc0175c192, type: 2}
-  - {fileID: 11400000, guid: 8fac044ff7700a24bb20fc5771a33ff2, type: 2}
-  - {fileID: 11400000, guid: 8f4491991150baf4084df588287dd0e7, type: 2}
   - {fileID: 11400000, guid: d5927af8d96eba44c80ec0975320acef, type: 2}
   - {fileID: 11400000, guid: 5dc37ea2b4da2664181aaf82db835666, type: 2}
+  - {fileID: 11400000, guid: 8fac044ff7700a24bb20fc5771a33ff2, type: 2}
+  - {fileID: 11400000, guid: 37722efe54229184fba31dcc0175c192, type: 2}
+  - {fileID: 11400000, guid: 8f4491991150baf4084df588287dd0e7, type: 2}
   - {fileID: 11400000, guid: 5621aee75c343a44da312bf1f6a6c067, type: 2}
-  - {fileID: 11400000, guid: 1c6e3d09c4a51084287ec9335c530ce3, type: 2}
+  - {fileID: 11400000, guid: 482a49a66e60dab42a06f348f61c6f04, type: 2}
   - {fileID: 11400000, guid: 1c6e3d09c4a51084287ec9335c530ce3, type: 2}
   - {fileID: 11400000, guid: 4e3214c52914f5645b0e5de1c31eef7d, type: 2}
   - {fileID: 11400000, guid: 05a427659553b754f9cc1ea54d6bfa55, type: 2}
+  - {fileID: 11400000, guid: 4be790d02642aa24da4cab2e54874785, type: 2}
+  - {fileID: 11400000, guid: 6a33234cf0d3dd845b19e8a46bb5d5a0, type: 2}
+  - {fileID: 11400000, guid: 030055749e0e4d941823308d6ad4751c, type: 2}
+  - {fileID: 11400000, guid: 78e11a7bf4dd7214191973d279380aea, type: 2}
