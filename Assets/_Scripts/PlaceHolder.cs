@@ -11,15 +11,16 @@ public class PlaceHolder : MonoBehaviour
     public static Action<PlaceHolder> OnHolderFull = delegate { };
     public static Action<PlaceHolder> OnHolderEmpty = delegate { };
     public static Action<PlaceHolder> OnHolderDragged = delegate { };
+    public static Action<PlaceHolder> OnHolderLetGo = delegate { };
 
     [SerializeField] PieceDataManager DataManager;
-    
+     
     public GameObject GridObj;
    
     public PieceController pieceController;
     
     public Vector3 mOffset;
-    private Vector3 upOffset;
+    public Vector3 upOffset;
     private GridController grid;
 
     public int rotIndex = 0;
@@ -49,15 +50,14 @@ public class PlaceHolder : MonoBehaviour
     void OnMouseDrag()
     {
         pieceController.transform.position = GetMouseWorldPos() + mOffset;
-        //pieceController.CheckPos();
         OnHolderDragged(this);
-
     }
 
     void OnMouseUp()
     {
-        
-        for (int i = 0; i < pieceController.cellSprites.Length; i++)
+        OnHolderLetGo(this);
+
+        /*for (int i = 0; i < pieceController.cellSprites.Length; i++)
         {
             if (!GameManager.Instance.gridController.IsValid(pieceController.cellSprites[i].transform.position) || !GameManager.Instance.gridController.IsValidToFill(pieceController.cellSprites[i].transform.position))
             {
@@ -73,6 +73,28 @@ public class PlaceHolder : MonoBehaviour
         {
             GameManager.Instance.gridController.FillGrid(pieceController.cellSprites[i].transform.position, pieceController.cellSprites[i].transform);
         }
+
+        OnHolderEmpty(this);*/
+    }
+
+    public void PlaceHolderIsFull()
+    {
+        pieceController.transform.localPosition = Vector3.zero;
+        pieceController.CleanPoes();
+        OnHolderFull(this);
+    }
+
+    public void PlaceHolderIsEmpty(GameObject[] shadowCells)
+    {
+        //fill grid where the shadows are
+        for (int i = 0; i < shadowCells.Length; i++)
+        {
+            if (shadowCells[i].activeInHierarchy)
+            {
+                GameManager.Instance.gridController.FillGrid(shadowCells[i].transform.position, pieceController.cellSprites[0].transform);
+            }
+        }
+
 
         OnHolderEmpty(this);
     }

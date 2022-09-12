@@ -19,22 +19,35 @@ public class ShadowPlaceHolder : MonoBehaviour
         GenerateShadowShape();
         PlaceHolder.OnHolderClicked += OnPlaceHolderClickedShadow;
         PlaceHolder.OnHolderDragged += OnPlaceHolderDraggedShadow;
-        PlaceHolder.OnHolderFull += OnPlaceHolderFullShadow;
-        //PlaceHolder.OnHolderEmpty += OnPlaceHolderEmptyShadow;
+        PlaceHolder.OnHolderFull += ResetShadow;
+        PlaceHolder.OnHolderEmpty += ResetShadow;
+        PlaceHolder.OnHolderLetGo += OnHolderLetGoCheckShadows;
+    }
+
+    private void OnHolderLetGoCheckShadows(PlaceHolder obj)
+    {
+        for (int i = 0; i < shadowCells.Length; i++)
+        {
+            if (!GameManager.Instance.gridController.IsValid(shadowCells[i].transform.position) || !GameManager.Instance.gridController.IsValidToFill(shadowCells[i].transform.position))
+            {
+                obj.PlaceHolderIsFull();
+                return;
+            }
+        }
+        obj.PlaceHolderIsEmpty(shadowCells);
     }
 
     private void OnPlaceHolderDraggedShadow(PlaceHolder obj)
     {
-        piece.transform.position = obj.GetMouseWorldPos() + obj.mOffset;
         for (int i = 0; i < shadowCells.Length; i++)
         {
-            if (shadowCells[i].activeInHierarchy == true)
-                shadowCells[i].transform.parent.position = GameManager.Instance.gridController.GetCellPositionFromWorldPosition(transform.position + localPos[i]);
+            shadowCells[i].transform.position = GameManager.Instance.gridController.GetCellPositionFromWorldPosition(piece.transform.position + localPos[i]);
         }
     }
 
-    private void OnPlaceHolderFullShadow(PlaceHolder obj)
+    private void ResetShadow(PlaceHolder obj)
     {
+        piece.transform.SetParent(transform);
         for (int i = 0; i < shadowCount; i++)
         {
             shadowCells[i].SetActive(false);
@@ -43,16 +56,15 @@ public class ShadowPlaceHolder : MonoBehaviour
 
     private void OnPlaceHolderClickedShadow(PlaceHolder obj)
     {
-        transform.SetParent(obj.transform);
-        transform.localPosition = Vector3.zero;
+        piece.transform.SetParent(obj.pieceController.transform);
+        piece.transform.localPosition = Vector3.zero;
 
         PieceController pieceCtrl = obj.pieceController;
         rot = (Rotation)obj.rotIndex;
         for (int i = 0; i < pieceCtrl.cellSprites.Length; i++)
         {
-            localPos[i] = pieceCtrl.data.Coordinations[i];
-            var cord = GameManager.PosGen(rot, localPos[i]);
-            shadowCells[i].transform.localPosition = cord;
+            localPos[i] = GameManager.PosGen(rot, pieceCtrl.data.Coordinations[i]);
+            shadowCells[i].transform.localPosition = localPos[i];
             shadowCells[i].SetActive(true);
         }
     }
@@ -79,13 +91,4 @@ public class ShadowPlaceHolder : MonoBehaviour
         return;
     }
 
-
-    /*public void CheckPos()
-    {
-        for (int i = 0; i < shadowCells.Count; i++)
-        {
-            if (shadowCells[i].activeInHierarchy == true)
-                shadowCells[i].transform.parent.position = GameManager.Instance.gridController.GetCellPositionFromWorldPosition(transform.position + localPose[i]);
-        }
-    }*/
 }
