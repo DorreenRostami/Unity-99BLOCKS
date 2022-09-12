@@ -19,12 +19,14 @@ public class PlaceHolder : MonoBehaviour
     public PieceController pieceController;
     
     public Vector3 mOffset;
+    private Vector3 upOffset;
     private GridController grid;
 
     public int rotIndex = 0;
 
     void Start()
     {
+        upOffset = new Vector3(0f, 2f, 0f);
         pieceController = GameManager.Instance.GenerateShape();
         grid = GameManager.Instance.gridController;
         pieceController.transform.SetParent(transform);
@@ -34,6 +36,7 @@ public class PlaceHolder : MonoBehaviour
 
     void OnMouseDown()
     {
+        pieceController.transform.position += upOffset;
         mOffset = pieceController.transform.position - GetMouseWorldPos();
         OnHolderClicked(this);
     }
@@ -53,18 +56,22 @@ public class PlaceHolder : MonoBehaviour
 
     void OnMouseUp()
     {
-        //if piece position is not in grid
-        //getcellposfromworld
         
         for (int i = 0; i < pieceController.cellSprites.Length; i++)
         {
-            if (!GameManager.Instance.gridController.IsValid(pieceController.cellSprites[i].transform.position))
+            if (!GameManager.Instance.gridController.IsValid(pieceController.cellSprites[i].transform.position) || !GameManager.Instance.gridController.IsValidToFill(pieceController.cellSprites[i].transform.position))
             {
                 pieceController.transform.localPosition = Vector3.zero;
                 pieceController.CleanPoes();
                 OnHolderFull(this);
                 return;
             }
+        }
+
+        //now we can fill the grid
+        for (int i = 0; i < pieceController.cellSprites.Length; i++)
+        {
+            GameManager.Instance.gridController.FillGrid(pieceController.cellSprites[i].transform.position, pieceController.cellSprites[i].transform);
         }
 
         OnHolderEmpty(this);

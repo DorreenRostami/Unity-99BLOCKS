@@ -80,6 +80,50 @@ public class GridController : MonoBehaviour
                 pos.y <= maxPos.y;
     }
 
+    public bool IsValidToFill(Vector3 pos)
+    {
+        var t = pos;
+        t.x = MathF.Floor(pos.x);
+        t.y = Mathf.Floor(pos.y) - 6;
+
+        if (t.x <= -3)
+            t.x += 5;
+        else
+            t.x += 4;
+
+        if (t.y <= -3)
+            t.y += 5;
+        else
+            t.y += 4;
+
+
+
+        if (grid[(int)t.x, (int)t.y].Full)
+            return false;
+        return true;
+    }
+
+    public void FillGrid(Vector3 pos, Transform trans)
+    {
+        var t = pos;
+        t.x = MathF.Floor(pos.x);
+        t.y = Mathf.Floor(pos.y) - 6;
+
+        if (t.x <= -3)
+            t.x += 5;
+        else
+            t.x += 4;
+
+        if (t.y <= -3)
+            t.y += 5;
+        else
+            t.y += 4;
+
+        grid[(int)t.x, (int)t.y].Full = true;
+        grid[(int)t.x, (int)t.y].Transform = trans;
+
+
+    }
     public Vector2 GetCellPositionFromWorldPosition(Vector2 pos)
     {
         var t = pos;
@@ -138,11 +182,14 @@ public class GridCell
 {
     public int X { get; private set; }
     public int Y { get; private set; }
-    public Transform Transform { get; private set; }
+    public bool Full;
+    public Transform Transform;
+
     public GridCell(int x, int y, Transform transform)
     {
         X = x;
         Y = y;
         Transform = transform;
+        Full = false;
     }
 }
