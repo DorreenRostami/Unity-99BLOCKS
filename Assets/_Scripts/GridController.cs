@@ -46,6 +46,7 @@ public class GridController : MonoBehaviour
                 blockObj.transform.SetParent(borderObj.transform);
                 blockObj.transform.localPosition = new Vector2(blockSize.x * (x - 1), blockSize.y * (y - 1));
                 gridBlock[x, y] = new GridBlock(x, y, blockObj.transform);
+                gridBlock[x, y].cellGrid = new GridCell[cellWidth, cellHeight];
                 //gridBlock[x, y].InitializeBlock(cellWidth, cellHeight, cellSize, cell);
 
                 GridCell[,] gridList = new GridCell[cellWidth, cellHeight];
@@ -59,6 +60,7 @@ public class GridController : MonoBehaviour
                         int xi = q + (x * cellWidth);
                         int yi = z + (y * cellHeight);
                         grid[xi, yi] = new GridCell(xi, yi, cellObj.transform);
+                        gridBlock[x, y].cellGrid[q, z] = grid[xi, yi];
                         gridList[q,z] = grid[xi, yi];
                     }
                 }
@@ -72,7 +74,7 @@ public class GridController : MonoBehaviour
 
     }
 
-    public Vector2 CellXY(Vector3 pos)
+    public Vector2Int CellXY(Vector3 pos)
     {
         var t = pos;
         t.x = MathF.Floor(pos.x);
@@ -88,7 +90,7 @@ public class GridController : MonoBehaviour
         else
             t.y += 4;
 
-        return new Vector2(t.x, t.y);
+        return new Vector2Int((int)t.x, (int)t.y);
     }
 
     public bool IsValid(Vector3 pos)
@@ -138,7 +140,8 @@ public class GridController : MonoBehaviour
     {
         var t = CellXY(pos);
 
-        grid[(int)t.x, (int)t.y].ChildObject = trans;
+        grid[t.x, t.y].ChildObject = trans;
+        //grid[(int)t.x, (int)t.y].Transform = trans;
 
 
     }
@@ -227,7 +230,7 @@ public class GridCell
             _childObject = value;
             if (value == null)
                 return;
-            value.transform.parent.SetParent(Transform);
+            value.transform.SetParent(Transform);
             value.transform.localPosition = Vector3.zero;
         }
     }

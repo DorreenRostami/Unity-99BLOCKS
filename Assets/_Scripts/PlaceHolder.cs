@@ -19,8 +19,8 @@ public class PlaceHolder : MonoBehaviour
    
     public PieceController pieceController;
     
-    public Vector3 mOffset;
-    public Vector3 upOffset;
+    private Vector3 mOffset;
+    private Vector3 upOffset;
     private GridController grid;
 
     public int rotIndex = 0;
@@ -56,25 +56,6 @@ public class PlaceHolder : MonoBehaviour
     void OnMouseUp()
     {
         OnHolderLetGo(this);
-
-        /*for (int i = 0; i < pieceController.cellSprites.Length; i++)
-        {
-            if (!GameManager.Instance.gridController.IsValid(pieceController.cellSprites[i].transform.position) || !GameManager.Instance.gridController.IsValidToFill(pieceController.cellSprites[i].transform.position))
-            {
-                pieceController.transform.localPosition = Vector3.zero;
-                pieceController.CleanPoes();
-                OnHolderFull(this);
-                return;
-            }
-        }
-
-        //now we can fill the grid
-        for (int i = 0; i < pieceController.cellSprites.Length; i++)
-        {
-            GameManager.Instance.gridController.FillGrid(pieceController.cellSprites[i].transform.position, pieceController.cellSprites[i].transform);
-        }
-
-        OnHolderEmpty(this);*/
     }
 
     public void PlaceHolderIsFull()
@@ -91,9 +72,13 @@ public class PlaceHolder : MonoBehaviour
         {
             if (shadowCells[i].activeInHierarchy)
             {
-                GameManager.Instance.gridController.FillGrid(shadowCells[i].transform.position, pieceController.cellSprites[0].transform);
+                GameManager.Instance.gridController.FillGrid(
+                    shadowCells[i].transform.GetChild(0).position, pieceController.cellSprites[i].transform);
+
             }
         }
+
+        rotIndex = 0;
 
         GameManager.Instance.gridController.CheckBlockForScore();
 

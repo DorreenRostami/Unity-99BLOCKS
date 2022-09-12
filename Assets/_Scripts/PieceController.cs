@@ -34,13 +34,7 @@ namespace Assets._Scripts
                 cellSprites[i].transform.parent.localPosition = localPose[i];
             }
         }
-        /*public void CheckPos()
-        {
-            for (int i = 0; i < cellSprites.Length; i++)
-            {
-                cellSprites[i].transform.parent.position = GameManager.Instance.gridController.GetCellPositionFromWorldPosition(transform.position + localPose[i]);
-            }
-        }*/
+
         public void CleanPoes()
         {
             for (int i = 0; i < cellSprites.Length; i++)
