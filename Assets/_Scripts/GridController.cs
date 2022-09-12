@@ -72,6 +72,25 @@ public class GridController : MonoBehaviour
 
     }
 
+    public Vector2 CellXY(Vector3 pos)
+    {
+        var t = pos;
+        t.x = MathF.Floor(pos.x);
+        t.y = Mathf.Floor(pos.y) - 6;
+
+        if (t.x <= -3)
+            t.x += 5;
+        else
+            t.x += 4;
+
+        if (t.y <= -3)
+            t.y += 5;
+        else
+            t.y += 4;
+
+        return new Vector2(t.x, t.y);
+    }
+
     public bool IsValid(Vector3 pos)
     {
         return pos.x >= minPos.x &&
@@ -82,45 +101,44 @@ public class GridController : MonoBehaviour
 
     public bool IsValidToFill(Vector3 pos)
     {
-        var t = pos;
-        t.x = MathF.Floor(pos.x);
-        t.y = Mathf.Floor(pos.y) - 6;
-
-        if (t.x <= -3)
-            t.x += 5;
-        else
-            t.x += 4;
-
-        if (t.y <= -3)
-            t.y += 5;
-        else
-            t.y += 4;
-
-
+        var t = CellXY(pos);
 
         if (grid[(int)t.x, (int)t.y].Full)
             return false;
         return true;
     }
 
+    public void CheckBlockForScore()
+    {
+        for (int i = 0; i < blockWidth; i++)
+        {
+            for (int j = 0; j < blockHeight; j++)
+            {
+                if (gridBlock[i,j].IsFull)
+                {
+                    //pop animation
+
+                    for (int m = 0; m < cellWidth; m++)
+                    {
+                        for (int n = 0; n < cellHeight; n++)
+                        {
+                            gridBlock[i, j].cellGrid[m, n].ChildObject = null;
+                        }
+                    }
+
+                }
+            }
+        }
+        
+
+    }
+    
+
     public void FillGrid(Vector3 pos, Transform trans)
     {
-        var t = pos;
-        t.x = MathF.Floor(pos.x);
-        t.y = Mathf.Floor(pos.y) - 6;
+        var t = CellXY(pos);
 
-        if (t.x <= -3)
-            t.x += 5;
-        else
-            t.x += 4;
-
-        if (t.y <= -3)
-            t.y += 5;
-        else
-            t.y += 4;
-
-        grid[(int)t.x, (int)t.y].Full = true;
-        grid[(int)t.x, (int)t.y].Transform = trans;
+        grid[(int)t.x, (int)t.y].ChildObject = trans;
 
 
     }
@@ -155,6 +173,21 @@ public class GridBlock
     public int X { get; private set; }
     public int Y { get; private set; }
     public Transform Transform { get; private set; }
+    public bool IsFull { get
+        {
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (!cellGrid[i, j].Full)
+                        return false;
+                }
+                
+            }
+            return true;
+        } 
+    }
 
     public GridBlock(int x, int y,Transform transform)
     {
@@ -182,14 +215,30 @@ public class GridCell
 {
     public int X { get; private set; }
     public int Y { get; private set; }
-    public bool Full;
+    public bool Full => ChildObject != null;
     public Transform Transform;
 
+    public Transform ChildObject { get
+        {
+            return _childObject;
+        }
+        set
+        {
+            _childObject = value;
+            if (value == null)
+                return;
+            value.transform.parent.SetParent(Transform);
+            value.transform.localPosition = Vector3.zero;
+        }
+    }
+
+    Transform _childObject;
     public GridCell(int x, int y, Transform transform)
     {
         X = x;
         Y = y;
         Transform = transform;
-        Full = false;
     }
+    
+    
 }

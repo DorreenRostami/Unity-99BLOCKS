@@ -95,6 +95,7 @@ public class PlaceHolder : MonoBehaviour
             }
         }
 
+        GameManager.Instance.gridController.CheckBlockForScore();
 
         OnHolderEmpty(this);
     }
