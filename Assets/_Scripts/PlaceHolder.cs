@@ -74,6 +74,8 @@ public class PlaceHolder : MonoBehaviour
             GameManager.Instance.gridController.FillGrid(pieceController.cellSprites[i].transform.position, pieceController.cellSprites[i].transform);
         }
 
+        GameManager.Instance.gridController.CheckBlockForScore();
+
         OnHolderEmpty(this);
     }
 
