@@ -28,10 +28,13 @@ public class ShadowPlaceHolder : MonoBehaviour
     {
         for (int i = 0; i < shadowCells.Length; i++)
         {
-            if (!GameManager.Instance.gridController.IsValid(shadowCells[i].transform.position) || !GameManager.Instance.gridController.IsValidToFill(shadowCells[i].transform.position))
+            if (shadowCells[i].activeInHierarchy)
             {
-                obj.PlaceHolderIsFull();
-                return;
+                if (!GameManager.Instance.gridController.IsValid(shadowCells[i].transform.position) || !GameManager.Instance.gridController.IsValidToFill(shadowCells[i].transform.position))
+                {
+                    obj.PlaceHolderIsFull();
+                    return;
+                }
             }
         }
         obj.PlaceHolderIsEmpty(shadowCells);

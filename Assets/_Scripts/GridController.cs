@@ -105,6 +105,9 @@ public class GridController : MonoBehaviour
     {
         var t = CellXY(pos);
 
+        Debug.Log("x " + t.x + " y " + t.y);
+        Debug.Log("-----------------------");
+
         if (grid[(int)t.x, (int)t.y].Full)
             return false;
         return true;
@@ -112,6 +115,8 @@ public class GridController : MonoBehaviour
 
     public void CheckBlockForScore()
     {
+        List<GridBlock> popBlocks = new List<GridBlock>();
+
         for (int i = 0; i < blockWidth; i++)
         {
             for (int j = 0; j < blockHeight; j++)
@@ -119,18 +124,32 @@ public class GridController : MonoBehaviour
                 if (gridBlock[i,j].IsFull)
                 {
                     //pop animation
-
-                    for (int m = 0; m < cellWidth; m++)
-                    {
-                        for (int n = 0; n < cellHeight; n++)
-                        {
-                            gridBlock[i, j].cellGrid[m, n].ChildObject = null;
-                        }
-                    }
-
+                    popBlocks.Add(gridBlock[i,j]);
+                    
+                    Debug.Log("time to pop");
                 }
             }
         }
+
+        //check these blocks are more than 4
+        if(popBlocks.Count > 0)
+        {
+            GameManager.Instance.scoreInt += (popBlocks.Count ^ 2) * 9;
+            GameManager.Instance.scoreTxt.text = GameManager.Instance.scoreInt.ToString();
+        }
+
+        for (int i = 0; i < popBlocks.Count; i++)
+        {
+            for (int m = 0; m < cellWidth; m++)
+            {
+                for (int n = 0; n < cellHeight; n++)
+                {
+                    GameObject cellObj = MonoBehaviour.Instantiate(cell);
+                    popBlocks[i].cellGrid[m, n].ChildObject = null;
+                }
+            }
+        }
+
         
 
     }
@@ -141,8 +160,6 @@ public class GridController : MonoBehaviour
         var t = CellXY(pos);
 
         grid[t.x, t.y].ChildObject = trans;
-        //grid[(int)t.x, (int)t.y].Transform = trans;
-
 
     }
     public Vector2 GetCellPositionFromWorldPosition(Vector2 pos)

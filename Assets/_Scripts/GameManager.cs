@@ -16,11 +16,15 @@ public class GameManager : MonoBehaviour
     public GameObject playButton;
     public GameObject pauseButton;
     public GameObject score;
+    public TextMeshPro scoreTxt;
+    public int scoreInt;
 
     private void Awake()
     {
         Instance = this;
         //size = gridController.cellSize;
+        scoreTxt = score.transform.GetComponent<TextMeshPro>();
+        scoreInt = 0;
     }
     
     public PieceController GenerateShape()
