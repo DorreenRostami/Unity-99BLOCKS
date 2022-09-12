@@ -18,7 +18,6 @@ namespace Assets._Scripts
         public void Setup(PieceData data, Transform[] cells)
         {
             this.data = data;
-            //this.cells = cells;
             this.cellSprites = new SpriteRenderer[cells.Length];
             localPose = new Vector3[cells.Length];
             for (int i = 0; i < cells.Length; i++)
@@ -31,17 +30,17 @@ namespace Assets._Scripts
             this.rot = rot;
             for (int i = 0; i < cellSprites.Length; i++)
             {
-                localPose[i]= GameManager.PosGen(rot, data.Coordinations[i]);
+                localPose[i] = GameManager.PosGen(rot, data.Coordinations[i]);
                 cellSprites[i].transform.parent.localPosition = localPose[i];
             }
         }
-        public void CheckPos()
+        /*public void CheckPos()
         {
             for (int i = 0; i < cellSprites.Length; i++)
             {
                 cellSprites[i].transform.parent.position = GameManager.Instance.gridController.GetCellPositionFromWorldPosition(transform.position + localPose[i]);
             }
-        }
+        }*/
         public void CleanPoes()
         {
             for (int i = 0; i < cellSprites.Length; i++)

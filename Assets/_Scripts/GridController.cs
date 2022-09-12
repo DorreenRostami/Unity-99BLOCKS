@@ -34,20 +34,7 @@ public class GridController : MonoBehaviour
         borderObj.transform.position = new Vector2(0, 6);
         //borderObj.GetComponent<SpriteRenderer>().size = new Vector2(Screen.width / 2, Screen.height / 2);
 
-
-
-        
-        ///////////
         grid = new GridCell[cellWidth * blockWidth, cellHeight * blockHeight];
-        /*for (int x = 0; x < grid.GetLength(0); x++)
-        {
-            for (int y = 0; y < grid.GetLength(1); y++)
-            {
-                GameObject cellObj = MonoBehaviour.Instantiate(cell);
-                cellObj.GetComponent<SpriteRenderer>().size = new Vector2(cellSize.x, cellSize.y);
-                grid[x, y] = new GridCell(x , y , cellObj.transform);
-            }
-        }*/
 
         gridBlock = new GridBlock[blockWidth, blockHeight];
         for (int x = 0; x < blockWidth; x++)

@@ -7,19 +7,21 @@ using UnityEngine.UI;
 
 public class PlaceHolder : MonoBehaviour
 {
-    public static System.Action<PlaceHolder> OnHolderClicked = delegate { };
-    public static System.Action<PlaceHolder> OnHolderFull = delegate { };
-    public static System.Action<PlaceHolder> OnHolderEmpty = delegate { };
+    public static Action<PlaceHolder> OnHolderClicked = delegate { };
+    public static Action<PlaceHolder> OnHolderFull = delegate { };
+    public static Action<PlaceHolder> OnHolderEmpty = delegate { };
+    public static Action<PlaceHolder> OnHolderDragged = delegate { };
+
     [SerializeField] PieceDataManager DataManager;
     
     public GameObject GridObj;
    
     public PieceController pieceController;
     
-    private Vector3 mOffset;
+    public Vector3 mOffset;
     private GridController grid;
 
-    int rotIndex = 0;
+    public int rotIndex = 0;
 
     void Start()
     {
@@ -36,7 +38,7 @@ public class PlaceHolder : MonoBehaviour
         OnHolderClicked(this);
     }
 
-    private Vector3 GetMouseWorldPos()
+    public Vector3 GetMouseWorldPos()
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
@@ -44,7 +46,9 @@ public class PlaceHolder : MonoBehaviour
     void OnMouseDrag()
     {
         pieceController.transform.position = GetMouseWorldPos() + mOffset;
-        pieceController.CheckPos();
+        //pieceController.CheckPos();
+        OnHolderDragged(this);
+
     }
 
     void OnMouseUp()
