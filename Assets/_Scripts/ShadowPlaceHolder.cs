@@ -21,7 +21,6 @@ public class ShadowPlaceHolder : MonoBehaviour
     {
         GenerateShadowShape();
         PlaceHolder.OnHolderClicked += OnPlaceHolderClickedShadow;
-        //PlaceHolder.OnHolderDragged += OnPlaceHolderDraggedShadow;
         PlaceHolder.OnHolderFull += ResetShadow;
         PlaceHolder.OnHolderEmpty += ResetShadow;
         PlaceHolder.OnHolderLetGo += OnHolderLetGoCheckShadows;
@@ -40,31 +39,7 @@ public class ShadowPlaceHolder : MonoBehaviour
         }
         obj.PlaceHolderIsEmpty(shadowCells);
     }
-
-    //make shadows snap into the cells inside the grid while it's being dragged
-    private void OnPlaceHolderDraggedShadow(PlaceHolder obj)
-    {
-        piece.transform.position = obj.pieceController.transform.position;
-        int len = obj.pieceController.cellSprites.Length;
-        for (int i = 0; i < len; i++)
-        {
-            if (GameManager.Instance.gridController.IsInsideGrid(shadowCells[i].transform.position))
-            {
-                shadowCells[i].transform.position = GameManager.Instance.gridController.GetCellPositionFromWorldPosition(piece.transform.position + localPos[i]);
-                //shadowCells[i].transform.position = GameManager.Instance.gridController.GetCellPositionFromWorldPosition(piece.transform.position + obj.pieceController.data.Coordinations[i]);
-                if (!shadowCells[i].activeInHierarchy)
-                {
-                    shadowCells[i].SetActive(true);
-                    shadowCellsSprites[i].sprite = obj.pieceController.cellSprites[i].sprite;
-                }
-            }
-            else
-            {
-                shadowCells[i].SetActive(false);
-            }
-        }
-        
-    }
+    
 
     //deativate shadows when the shape isnt being dragged around anymore
     private void ResetShadow(PlaceHolder obj)
@@ -123,6 +98,7 @@ public class ShadowPlaceHolder : MonoBehaviour
         if (!isClicked)
             return;
 
+        //make shadows snap into the cells inside the grid while it's being dragged
         var pieceCtrl = clickedHolder.pieceController;
         piece.transform.position = pieceCtrl.transform.position;
         int len = pieceCtrl.cellSprites.Length;

@@ -10,7 +10,6 @@ public class PlaceHolder : MonoBehaviour
     public static Action<PlaceHolder> OnHolderClicked = delegate { };
     public static Action<PlaceHolder> OnHolderFull = delegate { };
     public static Action<PlaceHolder> OnHolderEmpty = delegate { };
-    public static Action<PlaceHolder> OnHolderDragged = delegate { };
     public static Action<PlaceHolder> OnHolderLetGo = delegate { };
 
     [SerializeField] PieceDataManager DataManager;
@@ -43,9 +42,6 @@ public class PlaceHolder : MonoBehaviour
 
         for (int i = 0; i < pieceController.cellSprites.Length; i++)
         {
-            var col = pieceController.cellSprites[i].color;
-            col.a = 0.5f;
-            pieceController.cellSprites[i].color = col;
             pieceController.cellSprites[i].transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         }
     }
@@ -58,16 +54,12 @@ public class PlaceHolder : MonoBehaviour
     void OnMouseDrag()
     {
         pieceController.transform.position = GetMouseWorldPos() + mOffset;
-        OnHolderDragged(this);
     }
 
     void OnMouseUp()
     {
         for (int i = 0; i < pieceController.cellSprites.Length; i++)
         {
-            var col = pieceController.cellSprites[i].color;
-            col.a = 1;
-            pieceController.cellSprites[i].color = col;
             pieceController.cellSprites[i].transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         }
 
