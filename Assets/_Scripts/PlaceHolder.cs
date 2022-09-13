@@ -40,6 +40,14 @@ public class PlaceHolder : MonoBehaviour
         pieceController.transform.position += upOffset;
         mOffset = pieceController.transform.position - GetMouseWorldPos();
         OnHolderClicked(this);
+
+        for (int i = 0; i < pieceController.cellSprites.Length; i++)
+        {
+            var col = pieceController.cellSprites[i].color;
+            col.a = 0.5f;
+            pieceController.cellSprites[i].color = col;
+            pieceController.cellSprites[i].transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        }
     }
 
     public Vector3 GetMouseWorldPos()
@@ -55,13 +63,24 @@ public class PlaceHolder : MonoBehaviour
 
     void OnMouseUp()
     {
+        for (int i = 0; i < pieceController.cellSprites.Length; i++)
+        {
+            var col = pieceController.cellSprites[i].color;
+            col.a = 1;
+            pieceController.cellSprites[i].color = col;
+            pieceController.cellSprites[i].transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        }
+
         OnHolderLetGo(this);
     }
 
     public void PlaceHolderIsFull()
     {
+        //bring shape back to the bottom
         pieceController.transform.localPosition = Vector3.zero;
         pieceController.CleanPoes();
+
+        //deactivate hidden shape and shadow
         OnHolderFull(this);
     }
 
@@ -78,10 +97,13 @@ public class PlaceHolder : MonoBehaviour
             }
         }
 
+        //reset totation for the new shape
         rotIndex = 0;
 
+        //check score
         GameManager.Instance.gridController.CheckBlockForScore();
 
+        //bring hidden shape to front and make a new one + deactivate shadow
         OnHolderEmpty(this);
     }
 
