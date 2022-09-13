@@ -1,4 +1,5 @@
 using Assets._Scripts;
+using RTLTMPro;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,17 +16,23 @@ public class GameManager : MonoBehaviour
     public GameObject playButton;
     public GameObject pauseButton;
     public GameObject score;
-    public TextMeshProUGUI scoreTxt;
+    public RTLTextMeshPro scoreTxt;
     public int scoreInt;
 
     public GameSetting gameSetting;
+
+    public GameObject timer;
+    public RTLTextMeshPro timerTxt;
     public float timeInSeconds = 300.0f;
+    [SerializeField] string scoreNameTExt;
 
     private void Awake()
     {
         Instance = this;
-        scoreTxt = score.GetComponent<TextMeshProUGUI>();
-        scoreTxt.text = "0";
+        //scoreTxt = score.GetComponent<TextMeshProUGUI>();
+        scoreTxt.text = scoreNameTExt;
+        //timerTxt = timer.GetComponent<TextMeshProUGUI>();
+        timerTxt.text = "????: 5:00";
         scoreInt = 0;
     }
     
@@ -76,10 +83,18 @@ public class GameManager : MonoBehaviour
         pauseButton.SetActive(false);
     }
 
+    private string secToMin(float sec)
+    {
+        int minutes = (int) sec / 60;
+        int seconds = (int)sec % 60;
+        return minutes.ToString() + ":" + seconds.ToString();
+
+    }
+
     void Update()
     {
         timeInSeconds -= Time.deltaTime;
-        
+        timerTxt.SetText(scoreNameTExt);// string.Format("{0} :{1}", "????", secToMin(timeInSeconds)));// "????: " + secToMin(timeInSeconds);
         if (timeInSeconds <= 0.0f)
         {
             TimerEnded();
