@@ -6,15 +6,12 @@ using UnityEngine;
 
 public class GameSetting : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Vector3 touchOffset;
+    public int scorePerBlock;
+    public float borderDistance;
+    public float clickedScale;
+
+    public float timer;
+
 }
