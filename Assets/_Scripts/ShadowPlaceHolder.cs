@@ -24,9 +24,10 @@ public class ShadowPlaceHolder : MonoBehaviour
         PlaceHolder.OnHolderLetGo += OnHolderLetGoCheckShadows;
     }
 
+    //check shadows to see if shape can fill the grid when it's done being dragged
     private void OnHolderLetGoCheckShadows(PlaceHolder obj)
     {
-        for (int i = 0; i < shadowCells.Length; i++)
+        for (int i = 0; i < obj.pieceController.cellSprites.Length; i++)
         {
             if (!GameManager.Instance.gridController.IsInsideGrid(shadowCells[i].transform.position) || !GameManager.Instance.gridController.IsValidToFill(shadowCells[i].transform.position))
             {
@@ -37,6 +38,7 @@ public class ShadowPlaceHolder : MonoBehaviour
         obj.PlaceHolderIsEmpty(shadowCells);
     }
 
+    //make shadows snap into the cells inside the grid while it's being dragged
     private void OnPlaceHolderDraggedShadow(PlaceHolder obj)
     {
         int len = obj.pieceController.cellSprites.Length;
@@ -57,6 +59,7 @@ public class ShadowPlaceHolder : MonoBehaviour
         }
     }
 
+    //deativate shadows when the shape isnt being dragged around anymore
     private void ResetShadow(PlaceHolder obj)
     {
         piece.transform.SetParent(transform);
@@ -66,6 +69,7 @@ public class ShadowPlaceHolder : MonoBehaviour
         }
     }
 
+    //get shadows ready for the shape that was just clicked
     private void OnPlaceHolderClickedShadow(PlaceHolder obj)
     {
         piece.transform.SetParent(obj.pieceController.transform);
@@ -77,10 +81,11 @@ public class ShadowPlaceHolder : MonoBehaviour
         {
             localPos[i] = GameManager.PosGen(rot, pieceCtrl.data.Coordinations[i]);
             shadowCells[i].transform.localPosition = localPos[i];
-            //shadowCells[i].SetActive(true);
         }
     }
 
+    //generate cells which will be used as a shadow inside the grid for the shape being dragged
+    //this only happens once at the start
     public void GenerateShadowShape()
     {
         piece = new GameObject("Shadow Piece");
@@ -88,7 +93,7 @@ public class ShadowPlaceHolder : MonoBehaviour
         piece.transform.localPosition = Vector3.zero;
         shadowCells = new GameObject[shadowCount];
         localPos = new Vector3[shadowCount];
-        //var piece = new GameObject("Piece", typeof(PieceController)).GetComponent<PieceController>();
+        
         for (int i = 0; i < shadowCount; i++)
         {
             GameObject cellObj = Instantiate(shadowPrefab);
@@ -99,7 +104,6 @@ public class ShadowPlaceHolder : MonoBehaviour
             cellObj.SetActive(false);
             shadowCells[i] = cellObj;
         }
-        
         return;
     }
 
