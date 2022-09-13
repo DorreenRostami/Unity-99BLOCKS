@@ -15,18 +15,19 @@ public class PlaceHolder : MonoBehaviour
     [SerializeField] PieceDataManager DataManager;
      
     public GameObject GridObj;
-   
+
+    public GameSetting gameSetting;
     public PieceController pieceController;
     
     private Vector3 mOffset;
-    private Vector3 upOffset;
     private GridController grid;
 
     public int rotIndex = 0;
 
     void Start()
     {
-        upOffset = new Vector3(0f, 2f, 0f);
+        //upOffset = new Vector3(0f, 2f, 0f);
+        
         pieceController = GameManager.Instance.GenerateShape();
         grid = GameManager.Instance.gridController;
         pieceController.transform.SetParent(transform);
@@ -36,7 +37,7 @@ public class PlaceHolder : MonoBehaviour
 
     void OnMouseDown()
     {
-        pieceController.transform.position += upOffset;
+        pieceController.transform.position += gameSetting.touchOffset;
         mOffset = pieceController.transform.position - GetMouseWorldPos();
         OnHolderClicked(this);
 
@@ -60,7 +61,8 @@ public class PlaceHolder : MonoBehaviour
     {
         for (int i = 0; i < pieceController.cellSprites.Length; i++)
         {
-            pieceController.cellSprites[i].transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            //new Vector3(0.8f, 0.8f, 0.8f)
+            pieceController.cellSprites[i].transform.localScale = gameSetting.startedScale;
         }
 
         OnHolderLetGo(this);

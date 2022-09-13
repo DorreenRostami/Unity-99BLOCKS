@@ -11,6 +11,7 @@ public class GameSetting : ScriptableObject
     public int scorePerBlock;
     public float borderDistance;
     public float clickedScale;
+    public Vector3 startedScale;
 
     public float timer;
 

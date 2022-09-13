@@ -22,6 +22,8 @@ public class GridController : MonoBehaviour
     [SerializeField] int cellWidth, cellHeight;
     public Vector2 cellSize;
 
+    public GameSetting gameSetting;
+
     void Start()
     {
         InitializeGrid();
@@ -167,13 +169,13 @@ public class GridController : MonoBehaviour
         t.x = MathF.Floor(pos.x);
         t.y = Mathf.Floor(pos.y);
         if (t.x > 1)
-            t.x += 0.5f;
+            t.x += gameSetting.borderDistance;
         else if (t.x < -1)
-            t.x -= 0.5f;
+            t.x -= gameSetting.borderDistance;
         if (t.y > 7)
-            t.y += 0.5f;
+            t.y += gameSetting.borderDistance;
         else if (t.y < 5)
-            t.y -= 0.5f;
+            t.y -= gameSetting.borderDistance;
 
         return t;
     }

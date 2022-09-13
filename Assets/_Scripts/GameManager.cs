@@ -11,13 +11,14 @@ public class GameManager : MonoBehaviour
     public PieceDataManager DataManager;
     public GridController gridController;
     public GameObject[] cellsPrefab;
-    public Vector2 shapeCellSize;
 
     public GameObject playButton;
     public GameObject pauseButton;
     public GameObject score;
     public TextMeshPro scoreTxt;
     public int scoreInt;
+
+    public GameSetting gameSetting;
 
     private void Awake()
     {
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject cellObj = Instantiate(cell);
             Transform shape = cellObj.transform.GetChild(0);
-            shape.transform.localScale = new Vector2(shapeCellSize.x, shapeCellSize.y);
+            shape.transform.localScale = new Vector2(gameSetting.startedScale.x, gameSetting.startedScale.y);
             cellObj.transform.SetParent(piece.transform);
             cells.Add(cellObj.transform);
         }
