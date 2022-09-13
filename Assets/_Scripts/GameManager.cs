@@ -15,16 +15,17 @@ public class GameManager : MonoBehaviour
     public GameObject playButton;
     public GameObject pauseButton;
     public GameObject score;
-    public TextMeshPro scoreTxt;
+    public TextMeshProUGUI scoreTxt;
     public int scoreInt;
 
     public GameSetting gameSetting;
+    public float timeInSeconds = 300.0f;
 
     private void Awake()
     {
         Instance = this;
-        //size = gridController.cellSize;
-        scoreTxt = score.transform.GetComponent<TextMeshPro>();
+        scoreTxt = score.GetComponent<TextMeshProUGUI>();
+        scoreTxt.text = "0";
         scoreInt = 0;
     }
     
@@ -33,9 +34,6 @@ public class GameManager : MonoBehaviour
         var cells = new List<Transform>();
 
         var piece = new GameObject("Piece",typeof(PieceController)).GetComponent<PieceController>();
-
-        //piece.transform.SetParent(transform);
-        //piece.transform.localPosition = Vector3.zero;
 
         var data = DataManager.GetRandomData();
         GameObject cell = cellsPrefab[UnityEngine.Random.Range(0, cellsPrefab.Length)];
@@ -76,6 +74,26 @@ public class GameManager : MonoBehaviour
     {
         playButton.SetActive(true);
         pauseButton.SetActive(false);
+    }
+
+    void Update()
+    {
+        timeInSeconds -= Time.deltaTime;
+        
+        if (timeInSeconds <= 0.0f)
+        {
+            TimerEnded();
+        }
+    }
+
+    private void TimerEnded()
+    {
+        Finish();
+    }
+
+    private void Finish()
+    {
+
     }
 }
 
