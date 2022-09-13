@@ -93,7 +93,7 @@ public class GridController : MonoBehaviour
         return new Vector2Int((int)t.x, (int)t.y);
     }
 
-    public bool IsValid(Vector3 pos)
+    public bool IsInsideGrid(Vector3 pos)
     {
         return pos.x >= minPos.x &&
                 pos.x <= maxPos.x &&
@@ -131,7 +131,6 @@ public class GridController : MonoBehaviour
                 }
             }
         }
-        
 
     }
     
@@ -141,8 +140,6 @@ public class GridController : MonoBehaviour
         var t = CellXY(pos);
 
         grid[t.x, t.y].ChildObject = trans;
-        //grid[(int)t.x, (int)t.y].Transform = trans;
-
 
     }
     public Vector2 GetCellPositionFromWorldPosition(Vector2 pos)
@@ -162,11 +159,6 @@ public class GridController : MonoBehaviour
         return t;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
 
 public class GridBlock 

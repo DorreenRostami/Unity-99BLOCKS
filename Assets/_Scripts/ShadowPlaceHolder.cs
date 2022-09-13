@@ -28,7 +28,7 @@ public class ShadowPlaceHolder : MonoBehaviour
     {
         for (int i = 0; i < shadowCells.Length; i++)
         {
-            if (!GameManager.Instance.gridController.IsValid(shadowCells[i].transform.position) || !GameManager.Instance.gridController.IsValidToFill(shadowCells[i].transform.position))
+            if (!GameManager.Instance.gridController.IsInsideGrid(shadowCells[i].transform.position) || !GameManager.Instance.gridController.IsValidToFill(shadowCells[i].transform.position))
             {
                 obj.PlaceHolderIsFull();
                 return;
@@ -39,9 +39,21 @@ public class ShadowPlaceHolder : MonoBehaviour
 
     private void OnPlaceHolderDraggedShadow(PlaceHolder obj)
     {
-        for (int i = 0; i < shadowCells.Length; i++)
+        int len = obj.pieceController.cellSprites.Length;
+        for (int i = 0; i < len; i++)
         {
-            shadowCells[i].transform.position = GameManager.Instance.gridController.GetCellPositionFromWorldPosition(piece.transform.position + localPos[i]);
+            if (GameManager.Instance.gridController.IsInsideGrid(shadowCells[i].transform.position))
+            {
+                shadowCells[i].transform.position = GameManager.Instance.gridController.GetCellPositionFromWorldPosition(piece.transform.position + localPos[i]);
+                if (!shadowCells[i].activeInHierarchy)
+                {
+                    shadowCells[i].SetActive(true);
+                }
+            }
+            else
+            {
+                shadowCells[i].SetActive(false);
+            }
         }
     }
 
@@ -65,7 +77,7 @@ public class ShadowPlaceHolder : MonoBehaviour
         {
             localPos[i] = GameManager.PosGen(rot, pieceCtrl.data.Coordinations[i]);
             shadowCells[i].transform.localPosition = localPos[i];
-            shadowCells[i].SetActive(true);
+            //shadowCells[i].SetActive(true);
         }
     }
 

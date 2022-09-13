@@ -60,8 +60,11 @@ public class PlaceHolder : MonoBehaviour
 
     public void PlaceHolderIsFull()
     {
+        //bring shape back to the bottom
         pieceController.transform.localPosition = Vector3.zero;
         pieceController.CleanPoes();
+
+        //deactivate hidden shape and shadow
         OnHolderFull(this);
     }
 
@@ -78,10 +81,13 @@ public class PlaceHolder : MonoBehaviour
             }
         }
 
+        //reset totation for the new shape
         rotIndex = 0;
 
+        //check score
         GameManager.Instance.gridController.CheckBlockForScore();
 
+        //bring hidden shape to front and make a new one + deactivate shadow
         OnHolderEmpty(this);
     }
 
