@@ -72,11 +72,12 @@ public class ShadowPlaceHolder : MonoBehaviour
     //get shadows ready for the shape that was just clicked
     private void OnPlaceHolderClickedShadow(PlaceHolder obj)
     {
-        piece.transform.SetParent(obj.pieceController.transform);
-        piece.transform.localPosition = Vector3.zero;
-
         PieceController pieceCtrl = obj.pieceController;
         rot = (Rotation)obj.rotIndex;
+
+        piece.transform.SetParent(pieceCtrl.transform);
+        piece.transform.localPosition = Vector3.zero;
+        
         for (int i = 0; i < pieceCtrl.cellSprites.Length; i++)
         {
             localPos[i] = GameManager.PosGen(rot, pieceCtrl.data.Coordinations[i]);

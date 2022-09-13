@@ -37,6 +37,14 @@ public class PlaceHolder : MonoBehaviour
 
     void OnMouseDown()
     {
+        for (int i = 0; i < pieceController.cellSprites.Length; i++)
+        {
+            var col = pieceController.cellSprites[i].color;
+            col.a = 0.5f;
+            pieceController.cellSprites[i].color = col;
+            pieceController.cellSprites[i].transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        }
+
         pieceController.transform.position += upOffset;
         mOffset = pieceController.transform.position - GetMouseWorldPos();
         OnHolderClicked(this);
@@ -55,6 +63,14 @@ public class PlaceHolder : MonoBehaviour
 
     void OnMouseUp()
     {
+        for (int i = 0; i < pieceController.cellSprites.Length; i++)
+        {
+            var col = pieceController.cellSprites[i].color;
+            col.a = 1;
+            pieceController.cellSprites[i].color = col;
+            pieceController.cellSprites[i].transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        }
+
         OnHolderLetGo(this);
     }
 
