@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public RTLTextMeshPro timerTxt;
     public float timeInSeconds = 300.0f;
     [SerializeField] string scoreNameTExt;
+    [SerializeField] string timeNameTExt;
 
     private void Awake()
     {
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
         //scoreTxt = score.GetComponent<TextMeshProUGUI>();
         scoreTxt.text = scoreNameTExt;
         //timerTxt = timer.GetComponent<TextMeshProUGUI>();
-        timerTxt.text = "????: 5:00";
+        timerTxt.text = timeNameTExt;
         scoreInt = 0;
     }
     
@@ -94,7 +95,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         timeInSeconds -= Time.deltaTime;
-        timerTxt.SetText(scoreNameTExt);// string.Format("{0} :{1}", "????", secToMin(timeInSeconds)));// "????: " + secToMin(timeInSeconds);
+        timerTxt.SetText(timeNameTExt + " " + secToMin(timeInSeconds));// string.Format("{0} :{1}", "????", secToMin(timeInSeconds)));// "????: " + secToMin(timeInSeconds);
         if (timeInSeconds <= 0.0f)
         {
             TimerEnded();
