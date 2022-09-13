@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         timeInSeconds -= Time.deltaTime;
-        string tmp = string.Format("{0}:{1}", (int)timeInSeconds / 60, (int)timeInSeconds % 60);
+        string tmp = string.Format("{0}:{1}", (int)timeInSeconds/60, (int)timeInSeconds%60);
         timerTxt.SetText(tmp);
         if (timeInSeconds <= 0.0f)
         {

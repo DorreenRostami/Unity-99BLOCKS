@@ -31,7 +31,8 @@ public class ShadowPlaceHolder : MonoBehaviour
     {
         for (int i = 0; i < obj.pieceController.cellSprites.Length; i++)
         {
-            if (!GameManager.Instance.gridController.IsInsideGrid(shadowCells[i].transform.position) || !GameManager.Instance.gridController.IsValidToFill(shadowCells[i].transform.position))
+            if (!GameManager.Instance.gridController.IsInsideGrid(shadowCells[i].transform.position) || 
+                !GameManager.Instance.gridController.IsValidToFill(shadowCells[i].transform.position))
             {
                 obj.PlaceHolderIsFull();
                 return;
@@ -106,9 +107,9 @@ public class ShadowPlaceHolder : MonoBehaviour
         {
             var pos = GameManager.Instance.gridController.
                     GetCellPositionFromWorldPosition(pieceCtrl.cellSprites[i].transform.position);
+            shadowCells[i].transform.position = pos;
             if (GameManager.Instance.gridController.IsInsideGrid(pos))
             {
-                shadowCells[i].transform.position = pos;
                 if (!shadowCells[i].activeInHierarchy)
                 {
                     shadowCells[i].SetActive(true);
