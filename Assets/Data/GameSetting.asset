@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156912dbc089ce34bae0addf9b13daaf, type: 3}
   m_Name: GameSetting
   m_EditorClassIdentifier: 
-  touchOffset: {x: 0, y: 2, z: 0}
+  touchOffset: {x: 0, y: 3, z: 0}
   scorePerBlock: 5
   borderDistance: 0.5
   clickedScale: 0.5
   startedScale: {x: 0.8, y: 0.8, z: 0.8}
-  timer: 60
+  timeInSeconds: 300

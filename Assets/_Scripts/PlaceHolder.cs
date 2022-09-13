@@ -36,7 +36,7 @@ public class PlaceHolder : MonoBehaviour
 
     void OnMouseDown()
     {
-        pieceController.transform.position += GameManager.Instance.gameSetting.touchOffset;
+        pieceController.transform.position += GameManager.Instance.gameSettings.touchOffset;
         mOffset = pieceController.transform.position - GetMouseWorldPos();
         OnHolderClicked(this);
 
@@ -61,7 +61,7 @@ public class PlaceHolder : MonoBehaviour
         for (int i = 0; i < pieceController.cellSprites.Length; i++)
         {
             //new Vector3(0.8f, 0.8f, 0.8f)
-            pieceController.cellSprites[i].transform.localScale = GameManager.Instance.gameSetting.startedScale;
+            pieceController.cellSprites[i].transform.localScale = GameManager.Instance.gameSettings.startedScale;
         }
 
         OnHolderLetGo(this);

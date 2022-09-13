@@ -83,7 +83,7 @@ public class ShadowPlaceHolder : MonoBehaviour
         {
             GameObject cellObj = Instantiate(shadowPrefab);
             Transform shape = cellObj.transform.GetChild(0);
-            shape.transform.localScale = new Vector2(GameManager.Instance.gameSetting.startedScale.x, GameManager.Instance.gameSetting.startedScale.y);
+            shape.transform.localScale = new Vector2(GameManager.Instance.gameSettings.startedScale.x, GameManager.Instance.gameSettings.startedScale.y);
             cellObj.transform.SetParent(piece.transform);
             cellObj.transform.localPosition = Vector3.zero;
             cellObj.SetActive(false);

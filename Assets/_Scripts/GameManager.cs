@@ -15,26 +15,17 @@ public class GameManager : MonoBehaviour
 
     public GameObject playButton;
     public GameObject pauseButton;
-    public GameObject score;
     public RTLTextMeshPro scoreTxt;
     public int scoreInt;
-
-    public GameSetting gameSetting;
-
-    public GameObject timer;
+    public GameSetting gameSettings;
     public RTLTextMeshPro timerTxt;
-    public float timeInSeconds = 300.0f;
-    [SerializeField] string scoreNameTExt;
-    [SerializeField] string timeNameTExt;
+    private float timeInSeconds;
 
     private void Awake()
     {
         Instance = this;
-        //scoreTxt = score.GetComponent<TextMeshProUGUI>();
-        scoreTxt.text = scoreNameTExt;
-        //timerTxt = timer.GetComponent<TextMeshProUGUI>();
-        timerTxt.text = timeNameTExt;
         scoreInt = 0;
+        timeInSeconds = gameSettings.timeInSeconds;
     }
     
     public PieceController GenerateShape()
@@ -49,7 +40,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject cellObj = Instantiate(cell);
             Transform shape = cellObj.transform.GetChild(0);
-            shape.transform.localScale = new Vector2(gameSetting.startedScale.x, gameSetting.startedScale.y);
+            shape.transform.localScale = new Vector2(gameSettings.startedScale.x, gameSettings.startedScale.y);
             cellObj.transform.SetParent(piece.transform);
             cells.Add(cellObj.transform);
         }
@@ -84,18 +75,11 @@ public class GameManager : MonoBehaviour
         pauseButton.SetActive(false);
     }
 
-    private string secToMin(float sec)
-    {
-        int minutes = (int) sec / 60;
-        int seconds = (int)sec % 60;
-        return minutes.ToString() + ":" + seconds.ToString();
-
-    }
-
     void Update()
     {
         timeInSeconds -= Time.deltaTime;
-        timerTxt.SetText(timeNameTExt + " " + secToMin(timeInSeconds));// string.Format("{0} :{1}", "????", secToMin(timeInSeconds)));// "????: " + secToMin(timeInSeconds);
+        string tmp = string.Format("{0}:{1}", (int)timeInSeconds / 60, (int)timeInSeconds % 60);
+        timerTxt.SetText(tmp);
         if (timeInSeconds <= 0.0f)
         {
             TimerEnded();

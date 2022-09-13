@@ -12,7 +12,6 @@ public class GameSetting : ScriptableObject
     public float borderDistance;
     public float clickedScale;
     public Vector3 startedScale;
-
-    public float timer;
+    public float timeInSeconds;
 
 }
