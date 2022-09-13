@@ -12,13 +12,15 @@ namespace Assets._Scripts
         public PieceData data;
         public SpriteRenderer[] cellSprites;
         public Rotation rot;
+        public int multiply;
 
         Vector3[] localPose;
 
-        public void Setup(PieceData data, Transform[] cells)
+        public void Setup(PieceData data, Transform[] cells, int multiply=1)
         {
             this.data = data;
             this.cellSprites = new SpriteRenderer[cells.Length];
+            this.multiply = multiply;
             localPose = new Vector3[cells.Length];
             for (int i = 0; i < cells.Length; i++)
             {

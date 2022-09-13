@@ -105,8 +105,6 @@ public class GridController : MonoBehaviour
     {
         var t = CellXY(pos);
 
-        Debug.Log("x " + t.x + " y " + t.y);
-        Debug.Log("-----------------------");
 
         if (grid[(int)t.x, (int)t.y].Full)
             return false;
@@ -132,19 +130,18 @@ public class GridController : MonoBehaviour
         }
 
         //check these blocks are more than 4
-        if(popBlocks.Count > 0)
+        /*if(popBlocks.Count > 0)
         {
             GameManager.Instance.scoreInt += (popBlocks.Count ^ 2) * 9;
             GameManager.Instance.scoreTxt.text = GameManager.Instance.scoreInt.ToString();
         }
-
+*/
         for (int i = 0; i < popBlocks.Count; i++)
         {
             for (int m = 0; m < cellWidth; m++)
             {
                 for (int n = 0; n < cellHeight; n++)
                 {
-                    GameObject cellObj = MonoBehaviour.Instantiate(cell);
                     popBlocks[i].cellGrid[m, n].ChildObject = null;
                 }
             }
@@ -155,11 +152,13 @@ public class GridController : MonoBehaviour
     }
     
 
-    public void FillGrid(Vector3 pos, Transform trans)
+    public void FillGrid(Vector3 pos, Transform trans, int multiply)
     {
         var t = CellXY(pos);
 
+
         grid[t.x, t.y].ChildObject = trans;
+        grid[t.x, t.y].Multiply = multiply;
 
     }
     public Vector2 GetCellPositionFromWorldPosition(Vector2 pos)
@@ -227,14 +226,18 @@ public class GridBlock
                 cell[x, y].Transform.localScale = cellSize;
                 cell[x, y].Transform.SetParent(Transform);
                 cell[x, y].Transform.localPosition = new Vector2(cellSize.x * (x-1), cellSize.y * (y-1));
+
             }
         }
+
+        cellGrid = cell;
     }
 }
 public class GridCell
 {
     public int X { get; private set; }
     public int Y { get; private set; }
+    public int Multiply { get; set; }
     public bool Full => ChildObject != null;
     public Transform Transform;
 

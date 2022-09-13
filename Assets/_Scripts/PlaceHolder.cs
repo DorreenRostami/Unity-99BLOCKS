@@ -73,7 +73,7 @@ public class PlaceHolder : MonoBehaviour
             if (shadowCells[i].activeInHierarchy)
             {
                 GameManager.Instance.gridController.FillGrid(
-                    shadowCells[i].transform.GetChild(0).position, pieceController.cellSprites[i].transform);
+                    shadowCells[i].transform.GetChild(0).position, pieceController.cellSprites[i].transform, pieceController.multiply);
 
             }
         }
