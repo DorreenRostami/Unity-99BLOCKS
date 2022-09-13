@@ -158,12 +158,12 @@ MonoBehaviour:
   - {fileID: 337836707177584531, guid: dbe7f52fe13e9584eaac8a3329b77145, type: 3}
   - {fileID: 1554526257684377081, guid: b184a916c26b2374582377c551ac15cf, type: 3}
   - {fileID: 1427505311550537805, guid: 177dab6b3c6e91646bd0f3bfb37f0976, type: 3}
-  shapeCellSize: {x: 0.7, y: 0.7}
   playButton: {fileID: 324041231}
   pauseButton: {fileID: 417163076}
   score: {fileID: 411965481}
   scoreTxt: {fileID: 0}
   scoreInt: 0
+  gameSetting: {fileID: 11400000, guid: d4fc1bb97ded6304ab8748d49699b96e, type: 2}
   timeInSeconds: 300
 --- !u!4 &76971618
 Transform:
@@ -1674,6 +1674,7 @@ MonoBehaviour:
   cellWidth: 3
   cellHeight: 3
   cellSize: {x: 1, y: 1}
+  gameSetting: {fileID: 0}
 --- !u!4 &1844778580
 Transform:
   m_ObjectHideFlags: 0

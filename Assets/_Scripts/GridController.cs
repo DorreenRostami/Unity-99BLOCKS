@@ -169,13 +169,13 @@ public class GridController : MonoBehaviour
         t.x = MathF.Floor(pos.x);
         t.y = Mathf.Floor(pos.y);
         if (t.x > 1)
-            t.x += gameSetting.borderDistance;
+            t.x += GameManager.Instance.gameSetting.borderDistance;
         else if (t.x < -1)
-            t.x -= gameSetting.borderDistance;
+            t.x -= GameManager.Instance.gameSetting.borderDistance;
         if (t.y > 7)
-            t.y += gameSetting.borderDistance;
+            t.y += GameManager.Instance.gameSetting.borderDistance;
         else if (t.y < 5)
-            t.y -= gameSetting.borderDistance;
+            t.y -= GameManager.Instance.gameSetting.borderDistance;
 
         return t;
     }
