@@ -13,12 +13,19 @@ public class GameManager : MonoBehaviour
     public GridController gridController;
     public GameObject[] cellsPrefab;
 
+    public GameSetting gameSettings;
+
     public GameObject playButton;
     public GameObject pauseButton;
-    public RTLTextMeshPro scoreTxt;
+
+    //public RTLTextMeshPro scoreTxt;
+    public GameObject score;
+    private TextMeshProUGUI scoreText;
     public int scoreInt;
-    public GameSetting gameSettings;
-    public RTLTextMeshPro timerTxt;
+    
+    //public RTLTextMeshPro timerTxt;
+    public GameObject timer;
+    private TextMeshProUGUI timerText;
     private float timeInSeconds;
 
     private void Awake()
@@ -26,6 +33,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
         scoreInt = 0;
         timeInSeconds = gameSettings.timeInSeconds;
+        timerText = timer.GetComponent<TextMeshProUGUI>();
+        scoreText = score.GetComponent<TextMeshProUGUI>();
     }
     
     public PieceController GenerateShape()
@@ -79,7 +88,8 @@ public class GameManager : MonoBehaviour
     {
         timeInSeconds -= Time.deltaTime;
         string tmp = string.Format("{0}:{1}", (int)timeInSeconds/60, (int)timeInSeconds%60);
-        timerTxt.SetText(tmp);
+        //timerTxt.SetText(tmp);
+        timerText.text = tmp;
         if (timeInSeconds <= 0.0f)
         {
             TimerEnded();
