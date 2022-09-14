@@ -34,7 +34,6 @@ public class GridController : MonoBehaviour
         GameObject borderObj = Instantiate(border);
         borderObj.GetComponent<SpriteRenderer>().size = new Vector2(borderSize.x, borderSize.y);
         borderObj.transform.position = new Vector2(0, 6);
-        //borderObj.GetComponent<SpriteRenderer>().size = new Vector2(Screen.width / 2, Screen.height / 2);
 
         grid = new GridCell[cellWidth * blockWidth, cellHeight * blockHeight];
 
@@ -49,7 +48,6 @@ public class GridController : MonoBehaviour
                 blockObj.transform.localPosition = new Vector2(blockSize.x * (x - 1), blockSize.y * (y - 1));
                 gridBlock[x, y] = new GridBlock(x, y, blockObj.transform);
                 gridBlock[x, y].cellGrid = new GridCell[cellWidth, cellHeight];
-                //gridBlock[x, y].InitializeBlock(cellWidth, cellHeight, cellSize, cell);
 
                 GridCell[,] gridList = new GridCell[cellWidth, cellHeight];
 
@@ -163,18 +161,29 @@ public class GridController : MonoBehaviour
         grid[t.x, t.y].Multiply = multiply;
 
     }
+
     public Vector2 GetCellPositionFromWorldPosition(Vector2 pos)
     {
-        var t = pos;
-        t.x = MathF.Floor(pos.x);
-        t.y = MathF.Floor(pos.y);
-        if (t.x > 1)
+        var t = pos + new Vector2(0.5f, 0.5f);
+        t.x = MathF.Floor(t.x);
+        t.y = MathF.Floor(t.y);
+
+        /*if (pos.x >= 1.5)
             t.x += GameManager.Instance.gameSettings.borderDistance;
-        else if (t.x < -1)
+        else if (pos.x <= -1.5)
             t.x -= GameManager.Instance.gameSettings.borderDistance;
-        if (t.y > 7)
+        if (pos.y >= 7.5)
             t.y += GameManager.Instance.gameSettings.borderDistance;
-        else if (t.y < 5)
+        else if (pos.y <= 4.5)
+            t.y -= GameManager.Instance.gameSettings.borderDistance;*/
+
+        if (t.x >= 2)
+            t.x += GameManager.Instance.gameSettings.borderDistance;
+        else if (t.x <= -2)
+            t.x -= GameManager.Instance.gameSettings.borderDistance;
+        if (t.y >= 8)
+            t.y += GameManager.Instance.gameSettings.borderDistance;
+        else if (t.y <= 4)
             t.y -= GameManager.Instance.gameSettings.borderDistance;
 
         return t;

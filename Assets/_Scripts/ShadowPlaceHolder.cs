@@ -104,14 +104,17 @@ public class ShadowPlaceHolder : MonoBehaviour
         piece.transform.position = pieceCtrl.transform.position;
         int len = pieceCtrl.cellSprites.Length;
 
+
         bool isValid = true;
         for (int i = 0; i < len; i++)
         {
+            //TODO: figure out how to show shadows under the piece since this is the where the offset comes from
             var pos = GameManager.Instance.gridController.
                     GetCellPositionFromWorldPosition(pieceCtrl.cellSprites[i].transform.position);
+            
             shadowCells[i].transform.position = pos;
-            if (!GameManager.Instance.gridController.IsInsideGrid(shadowCells[i].transform.position) ||
-                !GameManager.Instance.gridController.IsValidToFill(shadowCells[i].transform.position))
+            if (!GameManager.Instance.gridController.IsInsideGrid(pos) ||
+                !GameManager.Instance.gridController.IsValidToFill(pos))
             {
                 isValid = false;
             }
