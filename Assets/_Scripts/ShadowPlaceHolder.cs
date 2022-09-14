@@ -103,23 +103,26 @@ public class ShadowPlaceHolder : MonoBehaviour
         var pieceCtrl = clickedHolder.pieceController;
         piece.transform.position = pieceCtrl.transform.position;
         int len = pieceCtrl.cellSprites.Length;
+
+        bool isValid = true;
         for (int i = 0; i < len; i++)
         {
             var pos = GameManager.Instance.gridController.
                     GetCellPositionFromWorldPosition(pieceCtrl.cellSprites[i].transform.position);
             shadowCells[i].transform.position = pos;
-            if (GameManager.Instance.gridController.IsInsideGrid(pos))
+            if (!GameManager.Instance.gridController.IsInsideGrid(shadowCells[i].transform.position) ||
+                !GameManager.Instance.gridController.IsValidToFill(shadowCells[i].transform.position))
             {
-                if (!shadowCells[i].activeInHierarchy)
-                {
-                    shadowCells[i].SetActive(true);
-                    shadowCellsSprites[i].sprite = pieceCtrl.cellSprites[i].sprite;
-                }
+                isValid = false;
             }
-            else
-            {
-                shadowCells[i].SetActive(false);
-            }
+        }
+
+        //activate shadows if piece can be dropped here, otherwise, deactive them
+        for (int i = 0; i < len; i++)
+        {
+            shadowCells[i].SetActive(isValid);
+            if(isValid)
+                shadowCellsSprites[i].sprite = pieceCtrl.cellSprites[i].sprite;
         }
     }
 

@@ -80,7 +80,7 @@ public class GridController : MonoBehaviour
     {
         var t = pos;
         t.x = MathF.Floor(pos.x);
-        t.y = Mathf.Floor(pos.y) - 6;
+        t.y = MathF.Floor(pos.y) - 6;
 
         if (t.x <= -3)
             t.x += 5;
@@ -167,7 +167,7 @@ public class GridController : MonoBehaviour
     {
         var t = pos;
         t.x = MathF.Floor(pos.x);
-        t.y = Mathf.Floor(pos.y);
+        t.y = MathF.Floor(pos.y);
         if (t.x > 1)
             t.x += GameManager.Instance.gameSettings.borderDistance;
         else if (t.x < -1)
