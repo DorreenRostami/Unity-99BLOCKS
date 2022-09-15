@@ -145,7 +145,7 @@ public class GridController : MonoBehaviour
                 }
             }
             score *= (popBlocks.Count * 20);
-            GameManager.Instance.gameSettings.mainScore += score;
+            GameManager.Instance.scoreInt += score;
         }
 
         

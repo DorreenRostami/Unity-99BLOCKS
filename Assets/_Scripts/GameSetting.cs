@@ -15,7 +15,6 @@ public class GameSetting : ScriptableObject
     public float timeInSeconds;
 
     public int scorePerCell; //which is 5
-    public int mainScore;
     public List<GridBlock> popBlocks;
 
 }
