@@ -8,10 +8,14 @@ public class GameSetting : ScriptableObject
 {
 
     public Vector3 touchOffset;
-    public int scorePerBlock;
+    //public int scorePerBlock;
     public float borderDistance;
     public float clickedScale;
     public Vector3 startedScale;
     public float timeInSeconds;
+
+    public int scorePerCell; //which is 5
+    public int mainScore;
+    public List<GridBlock> popBlocks;
 
 }

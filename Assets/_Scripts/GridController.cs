@@ -129,22 +129,23 @@ public class GridController : MonoBehaviour
             }
         }
 
-        //check these blocks are more than 4
-        /*if(popBlocks.Count > 0)
-        {
-            GameManager.Instance.scoreInt += (popBlocks.Count ^ 2) * 9;
-            GameManager.Instance.scoreTxt.text = GameManager.Instance.scoreInt.ToString();
-        }
-*/
+        //sending blocks to pop 
+        GameManager.Instance.gameSettings.popBlocks = popBlocks;
+
+        //counting score
         for (int i = 0; i < popBlocks.Count; i++)
         {
+            int score = 0;
             for (int m = 0; m < cellWidth; m++)
             {
                 for (int n = 0; n < cellHeight; n++)
                 {
                     popBlocks[i].cellGrid[m, n].ChildObject = null;
+                    score += popBlocks[i].cellGrid[m, n].Multiply;
                 }
             }
+            score *= 20;
+            GameManager.Instance.gameSettings.mainScore += score;
         }
 
         

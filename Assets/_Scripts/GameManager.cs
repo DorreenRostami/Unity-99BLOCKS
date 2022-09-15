@@ -86,6 +86,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        scoreText.text = GameManager.Instance.gameSettings.mainScore.ToString();
+
         timeInSeconds -= Time.deltaTime;
         string tmp = string.Format("{0}:{1}", (int)timeInSeconds/60, (int)timeInSeconds%60);
         //timerTxt.SetText(tmp);
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
         {
             TimerEnded();
         }
+
     }
 
     private void TimerEnded()
