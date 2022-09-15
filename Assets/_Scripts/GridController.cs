@@ -144,7 +144,7 @@ public class GridController : MonoBehaviour
                     score += popBlocks[i].cellGrid[m, n].Multiply;
                 }
             }
-            score *= 20;
+            score *= (popBlocks.Count * 20);
             GameManager.Instance.gameSettings.mainScore += score;
         }
 
