@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        //GameManager.Instance.gameSettings.mainScore = 0;
         Instance = this;
         scoreInt = 0;
         timeInSeconds = gameSettings.timeInSeconds;

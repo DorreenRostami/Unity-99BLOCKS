@@ -79,6 +79,8 @@ public class PlaceHolder : MonoBehaviour
 
     public void PlaceHolderIsEmpty(GameObject[] shadowCells)
     {
+        //score per shape
+        GameManager.Instance.scoreInt += GameManager.Instance.gameSettings.scorePerShape;
         //fill grid where the shadows are
         for (int i = 0; i < pieceController.cellSprites.Length; i++)
         {
